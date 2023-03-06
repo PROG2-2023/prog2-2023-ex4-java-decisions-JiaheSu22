@@ -1,0 +1,74 @@
+{
+  "tests": [
+    {
+      "name": "Testing setting up trip source using enum",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Setting_Up_Trip_Source_Using_Enum test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Testing setting up booking source using enum",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Setting_Up_Booking_Class_Using_Enum test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Testing total values in Booking class enum",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_total_values_in_Booking_Class_Enum test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Testing setting up trip source using input choice",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Setting_Up_Trip_Source_Using_Input_Choice test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 1
+    },
+    {
+      "name": "Testing departure and return date difference",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Departure_And_Return_Date_Difference test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Testing conditional ticket number generation",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Conditional_Ticket_Number_Generation test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    },
+    {
+      "name": "Testing conditional ticket price calculation",
+      "setup": "mvn compile",
+      "run": "mvn -Dtest=FlightBookingTest#testing_Conditional_Ticket_Price_Calculation test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 2
+    }
+  ]
+}
