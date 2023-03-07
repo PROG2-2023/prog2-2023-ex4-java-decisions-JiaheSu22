@@ -1,7 +1,6 @@
 package prog2.exercise4.flight.booking.system;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.util.UUID;
 
 public class FlightBooking {
@@ -31,10 +30,12 @@ public class FlightBooking {
     private int childPassengers;
     private int adultPassengers;
     private int totalPassengers;
-    private double departingTicketPrice; //This must NOT be entered by the Passenger
-    private double returnTicketPrice; //This must NOT be entered by the Passenger
-    private double totalTicketPrice; //This must NOT be entered by the Passenger
-    private String ticketNumber = generateTicketNumber();/*This must NOT be entered by the Passenger*/
+    private double departingTicketPrice = 0; //This must NOT be entered by the Passenger
+    private double returnTicketPrice = 0; //This must NOT be entered by the Passenger
+    private double totalTicketPrice = 0; //This must NOT be entered by the Passenger
+    private String ticketNumber;/*This must NOT be entered by the Passenger*/
+    private boolean flag = false;
+    private String oldDate;
 
     private String generateFlightID() {
         int randomInt = (int) (Math.random() * 9999) + 1;
@@ -58,7 +59,7 @@ public class FlightBooking {
             ticketNum += "DOM";
         } else {
             int temp = tripSource.toString().length() + tripDestination.toString().length();
-            if (temp == 14 || temp == 12 || temp == 15) {
+            if (temp == 14 || temp == 12) {
                 ticketNum += "DOM";
             } else ticketNum += "INT";
         }
@@ -74,19 +75,50 @@ public class FlightBooking {
         System.out.println();
     }
 
-    public String toString() {
-        return "Dear " + passengerFullName + ". Thank you for booking your flight with " + flightCompany + "." + "\n"
-                + "Following are the details of your booking and the trip:" + "\n"
+    public String toString1() {
+        return "Thank you for booking your flight with " + flightCompany + "."
+                + "Following are the details" + "\n" + "of your booking and the trip:" + "\n" + "\n"
                 + "Ticket Number: " + ticketNumber + "\n"
+                + "Passenger Name:" + passengerFullName + "\n"
                 + "From " + tripSource + " to " + tripDestination + "\n"
                 + "Date of departure: " + departureDate + "\n"
                 + "Date of return: " + returnDate + "\n"
-                + "Total passengers: " + getTotalPassengers() + "\n"
-                + "Total ticket price in Euros: " + getTotalTicketPrice();
+                + "Total passengers: " + totalPassengers + "\n"
+                + "Total ticket price in Euros: " + totalTicketPrice;
     }
 
-    public void setTripDestination(TripDestination tripDestination) {
-        this.tripDestination = tripDestination;
+    public String toString2() {
+        return "Thank you for booking your flight with " + flightCompany + "."
+                + "Following are the details" + "\n" + "of your booking and the trip:" + "\n" + "\n"
+                + "Ticket Number: " + ticketNumber + "\n"
+                + "Passenger Name:" + passengerFullName + "\n"
+                + "From " + tripSource + " to " + tripDestination + "\n"
+                + "Date of departure: " + departureDate + "\n"
+                + "Date of return: " + returnDate + "(Changed from old " + oldDate + " to new " + returnDate + ")" + "\n"
+                + "Total passengers: " + totalPassengers + "\n"
+                + "Total ticket price in Euros: " + totalTicketPrice + "\n" + "\n"
+                + "IMPORTANT NOTICE: As per our policy, the return date was changed because it was" + "\n"
+                + "less than two days apart from your departure date.";
+    }
+
+    public void setTripDestination(String tripDestinationChoice) {
+        int choice = Integer.parseInt(tripDestinationChoice);
+        switch (choice) {
+            case 1:
+                this.tripDestination = TripDestination.NANJING;
+                break;
+            case 2:
+                this.tripDestination = TripDestination.BEIJING;
+                break;
+            case 3:
+                this.tripDestination = TripDestination.OULU;
+                break;
+            case 4:
+                this.tripDestination = TripDestination.HELSINKI;
+                break;
+            default:
+                System.out.println("Invalid trip source choice: " + tripDestinationChoice);
+        }
     }
 
     public void setBookingClass(String inputChoice) {
@@ -201,6 +233,8 @@ public class FlightBooking {
     public void setReturnDate(LocalDate returnDate) {
         if (departureDate != null && departureDate.plusDays(2).isAfter(returnDate)) {
             this.returnDate = departureDate.plusDays(2);
+            flag = true;
+            oldDate = returnDate.toString();
         } else {
             this.returnDate = returnDate;
         }
@@ -213,20 +247,23 @@ public class FlightBooking {
 
 
     public double getTotalTicketPrice() {
-        totalTicketPrice = departingTicketPrice + returnTicketPrice;
         return totalTicketPrice;
     }
 
     public void setTotalTicketPrice() {
-        this.totalTicketPrice = 0;
+        this.totalTicketPrice = departingTicketPrice + returnTicketPrice;
+    }
+
+    public void setTicketNumber() {
+        this.ticketNumber = generateTicketNumber();
     }
 
     public String getTicketNumber() {
         return ticketNumber;
     }
 
-    public int setTotalPassengers(int num1, int num2) {
-        return num1 + num2;
+    public void setTotalPassengers(int num1, int num2) {
+        totalPassengers = num1 + num2;
     }
 
     public void setPassengerFullName(String passengerFullName) {
@@ -256,4 +293,7 @@ public class FlightBooking {
         }
     }
 
+    public boolean getFlag() {
+        return flag;
+    }
 }
