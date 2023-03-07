@@ -282,7 +282,7 @@ public class FlightBooking {
 
     public void setDepartingTicketPrice(int childNum, int adultNum) {
         if (ticketNumber.substring(7, 10).equals("DOM")) {
-            double temp = ((childNum * (300 * (0.1 * 300) + (0.05 * 300))) + (adultNum * (300 * (0.1 * 300) + (0.05 * 300))));
+            double temp = ((childNum + (300 * (0.1 * 300) + (0.05 * 300))) + (adultNum + (300 * (0.1 * 300) + (0.05 * 300))));
             if(bookingClass.equals(BookingClass.ECONOMY)){
                 departingTicketPrice = temp + 50;
             } else if (bookingClass.equals(BookingClass.BUSINESS)) {
@@ -291,7 +291,7 @@ public class FlightBooking {
                 departingTicketPrice = temp + 250;
             }
         }else if (ticketNumber.substring(7,10).equals("INT")){
-            double temp = ((childNum * (300 * (0.15 * 300) + (0.1 * 300))) + (adultNum * (300 * (0.15 * 300) + (0.1 * 300))));
+            double temp = ((childNum * (300 + (0.15 * 300) + (0.1 * 300))) + (adultNum + (300 + (0.15 * 300) + (0.1 * 300))));
             if(bookingClass.equals(BookingClass.ECONOMY)){
                 departingTicketPrice = temp + 50;
             } else if (bookingClass.equals(BookingClass.BUSINESS)) {

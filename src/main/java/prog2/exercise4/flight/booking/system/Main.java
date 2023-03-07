@@ -1,6 +1,7 @@
 package prog2.exercise4.flight.booking.system;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Scanner;
 
 
@@ -22,13 +23,15 @@ public class Main {
             System.out.println("Date of return(YYYY-MM-DD)>> ");
             p.setReturnDate(LocalDate.parse(in.nextLine()));
         }
+        System.out.println("Please select your booking class(1.FIRST, 2.BUSINESS, 3.ECONOMY)>> ");
+        p.setBookingClass(in.nextLine());
         System.out.println("Number of children>> ");
         int childNum = in.nextInt();
         System.out.println("Number of adults>> ");
         int adultNum = in.nextInt();
-        p.setTicketNumber();
         p.setTotalPassengers(childNum, adultNum);
         p.setDepartingTicketPrice(childNum, adultNum);
+        p.setReturnTicketPrice();
         p.setTotalTicketPrice();
         if (p.getFlag()) {
             System.out.println(p.toString2());
