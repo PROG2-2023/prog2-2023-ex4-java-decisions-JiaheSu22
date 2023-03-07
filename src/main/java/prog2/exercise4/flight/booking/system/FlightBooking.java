@@ -14,7 +14,7 @@ public class FlightBooking {
 
     public enum TripDestination {NANJING, BEIJING, SHANGHAI, OULU, HELSINKI, PARIS}
 
-    public enum TripType {ONEWAY, RETURN}
+    public enum TripType {ONE_WAY, RETURN}
 
     private TripType tripType;
     private TripSource tripSource;
@@ -168,7 +168,7 @@ public class FlightBooking {
 
     public void setTripType(String inputChoice) {
         int choice = Integer.parseInt(inputChoice);
-        this.tripType = choice == 1 ? TripType.ONEWAY : TripType.RETURN;
+        this.tripType = choice == 1 ? TripType.ONE_WAY : TripType.RETURN;
     }
 
     public TripType getTripType() {
@@ -281,8 +281,9 @@ public class FlightBooking {
     }
 
     public void setDepartingTicketPrice(int childNum, int adultNum) {
-        if (ticketNumber.substring(7, 10).equals("DOM")) {
-            double temp = ((childNum + (300 * (0.1 * 300) + (0.05 * 300))) + (adultNum + (300 * (0.1 * 300) + (0.05 * 300))));
+        String tempString = ticketNumber.substring(7,10);
+        if (tempString.equals("DOM")) {
+            double temp = (childNum * (300 + (0.1 * 300) + (0.05 * 300))) + (adultNum *(300 + (0.1 * 300) + (0.05 * 300)));
             if(bookingClass.equals(BookingClass.ECONOMY)){
                 departingTicketPrice = temp + 50;
             } else if (bookingClass.equals(BookingClass.BUSINESS)) {
@@ -290,8 +291,8 @@ public class FlightBooking {
             } else if (bookingClass.equals(BookingClass.FIRST)) {
                 departingTicketPrice = temp + 250;
             }
-        }else if (ticketNumber.substring(7,10).equals("INT")){
-            double temp = ((childNum * (300 + (0.15 * 300) + (0.1 * 300))) + (adultNum + (300 + (0.15 * 300) + (0.1 * 300))));
+        }else if (tempString.equals("INT")){
+            double temp = (childNum * (300 + (0.15 * 300) + (0.1 * 300))) + (adultNum + (300 + (0.15 * 300) + (0.1 * 300)));
             if(bookingClass.equals(BookingClass.ECONOMY)){
                 departingTicketPrice = temp + 50;
             } else if (bookingClass.equals(BookingClass.BUSINESS)) {
@@ -303,7 +304,7 @@ public class FlightBooking {
     }
 
     public void setReturnTicketPrice() {
-        if (tripType.toString() == "RETURN") {
+        if (tripType.toString().equals("RETURN")) {
             this.returnTicketPrice = departingTicketPrice;
         } else {
             this.returnTicketPrice = 0;
