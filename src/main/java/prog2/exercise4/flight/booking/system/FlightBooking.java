@@ -33,7 +33,7 @@ public class FlightBooking {
     private double departingTicketPrice = 0; //This must NOT be entered by the Passenger
     private double returnTicketPrice = 0; //This must NOT be entered by the Passenger
     private double totalTicketPrice = 0; //This must NOT be entered by the Passenger
-    private String ticketNumber;/*This must NOT be entered by the Passenger*/
+    private String ticketNumber = generateTicketNumber();/*This must NOT be entered by the Passenger*/
     private boolean flag = false;
     private String oldDate;
 
@@ -247,6 +247,7 @@ public class FlightBooking {
 
 
     public double getTotalTicketPrice() {
+        totalTicketPrice = departingTicketPrice + returnTicketPrice;
         return totalTicketPrice;
     }
 
@@ -280,8 +281,24 @@ public class FlightBooking {
     }
 
     public void setDepartingTicketPrice(int childNum, int adultNum) {
-        if (tripDestination.toString() == "BEIJING" && tripSource.toString() == "NANJING") {
-            this.departingTicketPrice = ((childNum * (300 * (0.1 * 300) + (0.05 * 300))) + (adultNum * (300 * (0.1 * 300) + (0.05 * 300)))) + 250;
+        if (ticketNumber.substring(7, 10).equals("DOM")) {
+            double temp = ((childNum * (300 * (0.1 * 300) + (0.05 * 300))) + (adultNum * (300 * (0.1 * 300) + (0.05 * 300))));
+            if(bookingClass.equals(BookingClass.ECONOMY)){
+                departingTicketPrice = temp + 50;
+            } else if (bookingClass.equals(BookingClass.BUSINESS)) {
+                departingTicketPrice = temp + 150;
+            } else if (bookingClass.equals(BookingClass.FIRST)) {
+                departingTicketPrice = temp + 250;
+            }
+        }else if (ticketNumber.substring(7,10).equals("INT")){
+            double temp = ((childNum * (300 * (0.15 * 300) + (0.1 * 300))) + (adultNum * (300 * (0.15 * 300) + (0.1 * 300))));
+            if(bookingClass.equals(BookingClass.ECONOMY)){
+                departingTicketPrice = temp + 50;
+            } else if (bookingClass.equals(BookingClass.BUSINESS)) {
+                departingTicketPrice = temp + 150;
+            } else if (bookingClass.equals(BookingClass.FIRST)) {
+                departingTicketPrice = temp + 250;
+            }
         }
     }
 

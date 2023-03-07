@@ -18,7 +18,7 @@ public class Main {
         p.setTripType(in.nextLine());
         System.out.println("Date of departure(YYYY-MM-DD)>> ");
         p.setDepartureDate(LocalDate.parse(in.nextLine()));
-        if (p.getTripType().toString() == "RETURN") {
+        if (p.getTripType().toString().equals("RETURN")) {
             System.out.println("Date of return(YYYY-MM-DD)>> ");
             p.setReturnDate(LocalDate.parse(in.nextLine()));
         }
